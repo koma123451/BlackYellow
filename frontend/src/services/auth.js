@@ -48,7 +48,7 @@ import { apiRequest } from "./api.js";
 
 // Register
 export const registerUser = async ({ username, email, password }) => {
-  const { ok, data } = await apiRequest("/auth/register", {
+  const { ok, data } = await apiRequest("/api/auth/register", {
     method: "POST",
     body: JSON.stringify({ username, email, password }),
   });
@@ -57,7 +57,7 @@ export const registerUser = async ({ username, email, password }) => {
 
 // Login
 export const loginUser = async ({ email, password }) => {
-  const { ok, data } = await apiRequest("/auth/login", {
+  const { ok, data } = await apiRequest("/api/auth/login", {
     method: "POST",
     body: JSON.stringify({ email, password }),
   });
@@ -66,12 +66,12 @@ export const loginUser = async ({ email, password }) => {
 
 // Get current user (keep login on refresh)
 export const getMe = async () => {
-  const { ok, data } = await apiRequest("/auth");
+  const { ok, data } = await apiRequest("/api/auth");
   return ok ? data : null;
 };
 
 // Logout
 export const logout = async () => {
-  const { ok } = await apiRequest("/auth/logout", { method: "POST" });
+  const { ok } = await apiRequest("/api/auth/logout", { method: "POST" });
   return ok;
 };
