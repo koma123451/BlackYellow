@@ -1,11 +1,11 @@
 import { Box, Flex, Text, Button, HStack} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import {useUserStore} from "../../store/user.js"
-
+import { useNavigate } from "react-router-dom";
 function Navbar() {
   const {user,logout}= useUserStore();
   console.log(user)
-
+const navigate = useNavigate();
 
   return (
     <Box bg="brand.gray" px={8} py={4} shadow="md">
@@ -31,7 +31,10 @@ function Navbar() {
     <>
       <Button as={Link} to="/Cart">Cart</Button>
       <Text fontWeight="bold" color="yellow.300">Hi, {user.username}</Text>
-      <Button onClick={logout}>Logout</Button>
+      <Button onClick={async () => {
+    await logout();   
+    navigate("/login"); 
+  }}>Logout</Button>
     </>
   )}
 
