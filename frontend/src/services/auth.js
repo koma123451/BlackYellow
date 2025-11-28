@@ -67,7 +67,9 @@ export const loginUser = async ({ email, password }) => {
 // Get current user (keep login on refresh)
 export const getMe = async () => {
   const { ok, data } = await apiRequest("/api/auth");
+  console.log("getmedata",data)
   return ok ? data : null;
+  
 };
 
 // Logout

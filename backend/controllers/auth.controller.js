@@ -8,7 +8,6 @@ const cookieOptions = {
   secure: isProd,
   sameSite: isProd ? "none" : "lax",
   path: "/",
-  ...(isProd && { domain: ".blackyellow-production.up.railway.app" }) // ⬅ only apply in production
 };
 
 
