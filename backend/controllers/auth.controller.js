@@ -8,7 +8,7 @@ const cookieOptions = {
   secure: isProd, 
   sameSite: isProd ? "none" : "lax",
   path: "/",
-  domain: isProd ? "blackyellow.vercel.app" : "localhost"
+  domain: isProd ? ".black-yellow-eta.vercel.app" : "localhost"
 };
 
 
