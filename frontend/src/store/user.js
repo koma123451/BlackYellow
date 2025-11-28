@@ -9,10 +9,10 @@ export const useUserStore = create((set)=>({
   login:async(email,password)=>{
     
     const data =await loginUser({email,password})
-   
+   console.log("data",data)
     if(data.message) return alert(data.message);
 
-    set({user:data})
+    set({user:data.user})
     return true
   },
   register:async(username,email,password)=>{
