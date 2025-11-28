@@ -28,7 +28,7 @@ const navigate = useNavigate();
           </Text>
           <HStack justify="space-between" w="full">
             <Text color="yellow.400" fontSize="xl">
-              {product.price}
+              ${product.price}
             </Text>
             <Button
               colorScheme="yellow"

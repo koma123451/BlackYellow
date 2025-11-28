@@ -14,7 +14,6 @@ const app= express();
 //middleware
 app.use(cors({
   origin: ["http://localhost:5173","https://black-yellow-eta.vercel.app"],
-  
   credentials: true,
 }));
 app.use(express.json());

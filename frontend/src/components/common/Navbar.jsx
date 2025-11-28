@@ -4,7 +4,7 @@ import {useUserStore} from "../../store/user.js"
 
 function Navbar() {
   const {user,logout}= useUserStore();
-
+  console.log(user)
 
 
   return (

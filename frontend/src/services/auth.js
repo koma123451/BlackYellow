@@ -73,5 +73,6 @@ export const getMe = async () => {
 // Logout
 export const logout = async () => {
   const { ok } = await apiRequest("/api/auth/logout", { method: "POST" });
+  
   return ok;
 };

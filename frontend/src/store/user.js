@@ -1,5 +1,5 @@
 import {create} from 'zustand'
-import {registerUser,loginUser,getMe,logout} from '../services/auth.js'
+import {registerUser,loginUser,getMe,logout as logoutAPI} from '../services/auth.js'
 export const useUserStore = create((set)=>({
   user:null,
   loading:true,
@@ -20,9 +20,13 @@ export const useUserStore = create((set)=>({
     set({user:data})
   },
   logout:async()=>{
-    await logout()
+    console.log("before logoutAPI")
+    await logoutAPI()
     set({user:null})
-    window.location.href = "/login"; 
+    console.log("user")
+    setTimeout(() => {
+    window.location.href = "/login";
+  }, 1000); // 150–300ms安全区
   },
   checkAuth:async()=>{
     try{

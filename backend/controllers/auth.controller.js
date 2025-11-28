@@ -1,6 +1,17 @@
 import User from '../models/user.model.js'
 import jwt from 'jsonwebtoken'
 
+const isProd = process.env.NODE_ENV === "production";
+
+const cookieOptions = {
+  httpOnly: true,
+  secure: isProd,
+  sameSite: isProd ? "none" : "lax",
+  path: "/",
+  ...(isProd && { domain: ".blackyellow-production.up.railway.app" }) // ⬅ only apply in production
+};
+
+
 const generateToken=(id)=>{
   return jwt.sign({id},process.env.JWT_SECRET,{expiresIn:"30d"});
 }
@@ -32,11 +43,7 @@ export const registerUser = async(req,res)=>{
   if(exists) return res.status(400).json({message:"Email already exists"})
   const user = await User.create({username,email,password});
 
-  res.cookie("token",generateToken(user._id),{
-    httpOnly:true,
-    secure: true,                           //process.env.NODE_ENV ==='production',
-    sameSite:"none"                       //"strict"
-  })
+  res.cookie("token",generateToken(user._id),cookieOptions)
   res.json({
     id:user._id,
     username:user.username,
@@ -51,11 +58,7 @@ export const loginUser = async(req,res)=>{
   if(!user||!(await user.matchPassword(password))){
     return res.status(401).json({message:"Invalid email or password"})
   }
-  res.cookie("token",generateToken(user._id),{
-    httpOnly:true,
-    secure:true,         //process.env.NODE_ENV ==='production',
-    sameSite:"none"                         //"strice"
-  })
+  res.cookie("token",generateToken(user._id),cookieOptions)
   res.json({
     id:user._id,
     username:user.username,
@@ -64,6 +67,14 @@ export const loginUser = async(req,res)=>{
 }
 
 export const logoutUser = (req,res)=>{
-  res.cookie("token","",{maxAge:1});
-  res.json({message:"Logged out"})
+  // res.cookie("token","",{maxAge:1});
+  // res.json({message:"Logged out"})
+  //res.clearCookie("token", cookieOptions);
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    path: "/"
+  });
+return res.json({ message: "Logged out" });
 }
