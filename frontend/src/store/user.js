@@ -19,8 +19,8 @@ export const useUserStore = create((set)=>({
     console.log("store register args:", username, email, password);
 
     const data =await registerUser({username,email,password})
-    console.log(data)
-    set({user:data})
+    console.log("register",data)
+    set({user:data.user})
   },
   logout:async()=>{
     console.log("before logoutAPI")
@@ -35,7 +35,8 @@ export const useUserStore = create((set)=>({
   checkAuth:async()=>{
     try{
     const data = await getMe();
-    if(data?.id) set ({user:data})
+    console.log("data",data)
+    if(data?.id) set ({user:data.user})
  }
   finally{
     set({loading:false})
