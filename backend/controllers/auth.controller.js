@@ -5,9 +5,10 @@ const isProd = process.env.NODE_ENV === "production";
 
 const cookieOptions = {
   httpOnly: true,
-  secure: isProd,
+  secure: isProd, 
   sameSite: isProd ? "none" : "lax",
   path: "/",
+  domain: isProd ? "blackyellow.vercel.app" : "localhost"
 };
 
 
@@ -68,12 +69,12 @@ export const loginUser = async(req,res)=>{
 export const logoutUser = (req,res)=>{
   // res.cookie("token","",{maxAge:1});
   // res.json({message:"Logged out"})
-  //res.clearCookie("token", cookieOptions);
-  res.clearCookie("token", {
-    httpOnly: true,
-    secure: true,
-    sameSite: "none",
-    path: "/"
-  });
+  res.clearCookie("token", cookieOptions);
+  // res.clearCookie("token", {
+  //   httpOnly: true,
+  //   secure: true,
+  //   sameSite: "none",
+  //   path: "/"
+  // });
 return res.json({ message: "Logged out" });
 }
