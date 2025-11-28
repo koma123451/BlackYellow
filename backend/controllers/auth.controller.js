@@ -34,7 +34,7 @@ export const getUser = async(req,res)=>{
 
 export const registerUser = async(req,res)=>{
   const{username,email,password} = req.body;
-  //console.log("📩 req.body =>", req.body);
+  console.log("📩 req.body =>", req.body);
 
 
   //console.log("username",username)

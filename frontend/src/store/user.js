@@ -19,8 +19,8 @@ export const useUserStore = create((set)=>({
     console.log("store register args:", username, email, password);
 
     const data =await registerUser({username,email,password})
-    console.log("register",data)
-    set({user:data.user})
+    if(data.success)set({user:data.user})
+    return data.success
   },
   logout:async()=>{
     console.log("before logoutAPI")

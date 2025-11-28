@@ -52,7 +52,8 @@ export const registerUser = async ({ username, email, password }) => {
     method: "POST",
     body: JSON.stringify({ username, email, password }),
   });
-  return ok ? data : null;
+  console.log("authRegiterdata:",data)
+   return { success: ok, user: data };
 };
 
 // Login
