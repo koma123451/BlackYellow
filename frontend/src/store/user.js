@@ -1,6 +1,9 @@
 import {create} from 'zustand'
 import {registerUser,loginUser,getMe,logout as logoutAPI} from '../services/auth.js'
+import { useNavigate } from "react-router-dom";
+const navigate = useNavigate();
 export const useUserStore = create((set)=>({
+  
   user:null,
   loading:true,
   login:async(email,password)=>{
@@ -25,7 +28,8 @@ export const useUserStore = create((set)=>({
     set({user:null})
     console.log("user")
     setTimeout(() => {
-    window.location.href = "/login";
+    // window.location.href = "/login";
+    navigate("/login");
   }, 1000); // 150–300ms安全区
   },
   checkAuth:async()=>{
