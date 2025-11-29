@@ -6,9 +6,8 @@ const isProd = process.env.NODE_ENV === "production";
 const cookieOptions = {
   httpOnly: true,
   secure: isProd, 
-  sameSite: isProd ? "none" : "lax",
+  sameSite: "none",
   path: "/",
-  domain: isProd ? ".black-yellow-eta.vercel.app" : "localhost"
 };
 
 
