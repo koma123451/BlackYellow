@@ -1,8 +1,10 @@
 import {create} from 'zustand'
 import {registerUser,loginUser,getMe,logout as logoutAPI} from '../services/auth.js'
+import { persist } from 'zustand/middleware'
 
-
-export const useUserStore = create((set)=>({
+export const useUserStore = create(
+  persist(
+  (set)=>({
   
   user:null,
   loading:true,
@@ -41,6 +43,12 @@ export const useUserStore = create((set)=>({
   finally{
     set({loading:false})
   }
-    }
-}))
+    },
+}),{
+  name:"user-storage", //key of localStorage
+
+}
+
+
+))
 
