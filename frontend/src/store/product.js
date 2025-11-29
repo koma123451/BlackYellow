@@ -24,7 +24,7 @@ export  const useProductStore = create((set)=>({
     if(!newProduct.name||!newProduct.brand||!newProduct.price||!newProduct.image) {
      return {success:false,message:"Please enter all fields"}
   }
-    const {ok,data} = await apiRequest("/api/products",{
+    const {ok,data} = await apiRequest("/products",{
       method:"POST",
       body:JSON.stringify(newProduct)
      })
@@ -48,7 +48,7 @@ export  const useProductStore = create((set)=>({
 // },
 
   fetchProduct: async()=>{
-    const {data} = await apiRequest('/api/products');
+    const {data} = await apiRequest('/products');
     set({products:data.data})
   },
 
@@ -76,7 +76,7 @@ fetchSingleProduct:async(newProduct)=>{
    if(!newProduct.name||!newProduct.brand||!newProduct.price||!newProduct.image) {
        return {success:false,message:"Please enter all fields"}
      }
-     const{ok,data} = await apiRequest(`/api/products/${newProduct._id}`,{
+     const{ok,data} = await apiRequest(`/products/${newProduct._id}`,{
       method:"PUT",
       body:JSON.stringify(newProduct)
      })

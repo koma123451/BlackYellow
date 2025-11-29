@@ -1,4 +1,6 @@
 import { Box, Text, Button } from "@chakra-ui/react";
+import React from "react";
+
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
 import { Routes, Route } from "react-router-dom";
@@ -11,6 +13,7 @@ import Rigister from './pages/Register'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import {useUserStore} from './store/user.js'
 import {useEffect} from 'react'
+
 
 function App() {
   const {checkAuth,loading} = useUserStore()

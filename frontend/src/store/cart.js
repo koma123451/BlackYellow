@@ -14,7 +14,7 @@ cart:[],
 // },
 fetchCart:async()=>{
 
-const{ok,data} = await apiRequest('/api/cart/guest');
+const{ok,data} = await apiRequest('/cart/guest');
 
  if(ok && Array.isArray(data?.data)){
   set({cart:data.data});
@@ -40,7 +40,7 @@ const{ok,data} = await apiRequest('/api/cart/guest');
 // },
 
 addToCart:async(product)=>{
-  const {ok,data}= await apiRequest('/api/cart',{
+  const {ok,data}= await apiRequest('/cart',{
     method:"POST",
     body:JSON.stringify({
           userId:"guest",
@@ -63,7 +63,7 @@ addToCart:async(product)=>{
 // },
 
 removeFromCart:async(itemId)=>{
-  const{ok} = await apiRequest(`/api/cart/guest/${itemId}`,{
+  const{ok} = await apiRequest(`/cart/guest/${itemId}`,{
     method:"DELETE"
   })
     if(ok){
@@ -85,7 +85,7 @@ removeFromCart:async(itemId)=>{
 // },
 
 updateQuantity:async(itemId,action)=>{
-  const {ok,data} =await apiRequest(`/api/cart/guest/${itemId}`,{
+  const {ok,data} =await apiRequest(`/cart/guest/${itemId}`,{
     method:"PUT",
     body:JSON.stringify({action})
   })

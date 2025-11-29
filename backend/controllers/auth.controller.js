@@ -42,7 +42,7 @@ export const registerUser = async(req,res)=>{
   const exists = await User.findOne({email});
   if(exists) return res.status(400).json({message:"Email already exists"})
   const user = await User.create({username,email,password});
-
+  console.log("newUser",user)
   res.cookie("token",generateToken(user._id),cookieOptions)
   res.json({
     id:user._id,
