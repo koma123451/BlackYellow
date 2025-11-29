@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://blackyellow-production.up.railway.app/api/$1"
+    }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
+}
