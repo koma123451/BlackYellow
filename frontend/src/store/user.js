@@ -1,10 +1,8 @@
 import {create} from 'zustand'
 import {registerUser,loginUser,getMe,logout as logoutAPI} from '../services/auth.js'
-import { persist } from 'zustand/middleware'
 
-export const useUserStore = create(
-  persist(
-  (set)=>({
+
+export const useUserStore = create((set)=>({
   
   user:null,
   loading:true,
@@ -34,21 +32,19 @@ export const useUserStore = create(
     
   }, 1000); // 150–300ms安全区
   },
-  checkAuth:async()=>{
-    try{
+checkAuth: async () => {
+  try {
     const data = await getMe();
-    console.log("data",data)
-    if(data?.id) set ({user:data.user})
- }
-  finally{
-    set({loading:false})
+
+    if (data?.id) {
+      set({ user: data });
+    } else {
+      set({ user: null }); // 
+    }
+
+  } finally {
+    set({ loading: false });
   }
-    },
-}),{
-  name:"user-storage", //key of localStorage
-
 }
-
-
-))
+}))
 

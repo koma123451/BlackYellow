@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 function Navbar() {
   const {user,logout}= useUserStore();
   console.log(user)
+  console.log("🔥 CURRENT API URL:", import.meta.env.VITE_API_URL);
+
 const navigate = useNavigate();
 
   return (
