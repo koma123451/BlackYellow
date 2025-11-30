@@ -11,7 +11,7 @@ const ProductSection = () => {
   
 const products=useProductStore((s)=>s.products)
   return (
-    <Box bg="black" py={20} px={[6, 12]}>
+    <Box bg="black" py={20} px={[6, 12]} maxW="1200px" mx="auto">
       <VStack spacing={12}>
         <Text
           fontSize={["2xl", "4xl"]}
