@@ -1,6 +1,6 @@
 import { Box, Text, SimpleGrid, Image, VStack } from "@chakra-ui/react";
 
-const BrandShowcase = () => {
+const BrandShowcase = ({onBrandSelect}) => {
   const brands = [
     {
       name: "Razer",
@@ -48,7 +48,7 @@ const BrandShowcase = () => {
 
         <SimpleGrid columns={[2, 3, 6]} spacing={[6, 10]} justifyItems="center" w="full">
           {brands.map((brand) => (
-            <VStack key={brand.name} spacing={2}>
+            <VStack key={brand.name} spacing={2} cursor="pointer" onClick={()=>onBrandSelect(brand.name)}>
               <Box
                 bg="gray.700"
                 p={4}

@@ -8,7 +8,6 @@ const HomePage = ()=>{
 
  return(
     <Box>
-    <BrandShowcase />
     <ProductSection />
     </Box>
  )
