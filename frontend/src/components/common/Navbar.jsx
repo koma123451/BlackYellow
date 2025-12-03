@@ -16,7 +16,7 @@ const navigate = useNavigate();
       <Flex justify="space-between" align="center">
         {/* Logo */}
         <Text fontSize="2xl" fontWeight="bold" color="brand.orange" as={Link} to="/">
-          BlackYello 🖤🟡
+          BlackYellow 🖤🟡
         </Text>
 
         {/* 按钮组 */}

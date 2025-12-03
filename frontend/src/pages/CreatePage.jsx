@@ -20,7 +20,7 @@ const handleChange=(e)=>{
 }
 const handleSubmit = async (e)=>{
   e.preventDefault();
-  if(!product.name||!product.type||!product.brand||product.price){
+  if(!product.name||!product.type||!product.brand||!product.price){
     toast({
       title:"Missing fields",
       description:"Please fill in all required fields",

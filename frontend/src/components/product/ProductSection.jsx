@@ -10,6 +10,9 @@ const ProductSection = () => {
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [searchItem,setSearchItem]=useState("")
   const [sortPrice,setSortPrice]=useState("")
+  const [currentPage,setCurrentPage]=useState(1);
+  const productsPerpage = 6;
+
   useEffect(()=>{
     fetchProduct()
   },[fetchProduct])
@@ -27,6 +30,11 @@ const ProductSection = () => {
    return 0 //defalut
   }       
   )
+  const totalProducts = filterdProducts.length;
+  const totalPages =Math.ceil(totalProducts/productsPerpage);
+  const startIndex =(currentPage -1) *productsPerpage;
+  const endIndex = startIndex+productsPerpage;
+  const paginatedProducts = filterdProducts.slice(startIndex,endIndex)
 
   return (
     <Box>
@@ -51,15 +59,28 @@ const ProductSection = () => {
         </Text>
 
         <SimpleGrid columns={[1, 2, 3]} spacing={10}>
-          {filterdProducts.map((product) => (
+          {paginatedProducts.map((product) => (
             <ProductCard key={product._id || product.id} product={product} />
           ))}
         </SimpleGrid>
         {(selectedBrand||sortPrice)&&(<Button
         onClick={()=>setSelectedBrand(null)}
         >Show All Products</Button>)}
+        <HStack>
+          <Button
+          onClick={()=>setCurrentPage(currentPage -1)} isDisabled={currentPage ===1}>Prev</Button>
+          <Text color="white">
+          {currentPage}/{totalPages}
+          </Text>
+          <Button
+          onClick={()=>setCurrentPage(currentPage+1)}
+          isDisabled={currentPage === totalPages}
+          >Next</Button>
+          </HStack>
       </VStack>
+          
     </Box>
+
     </Box>
   );
 };

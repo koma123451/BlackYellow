@@ -1,9 +1,10 @@
 import { Box, Text, SimpleGrid, VStack, Image, Button, HStack } from "@chakra-ui/react";
 import {useCart} from '../../store/cart.js'
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useUserStore } from "../../store/user.js";
 const ProductCard = ({ product }) => {
 const navigate = useNavigate();
+  const user = useUserStore((s)=>s.user);
   const{addToCart,fetchCart} = useCart();
   return (
     <Box
@@ -30,21 +31,21 @@ const navigate = useNavigate();
             <Text color="yellow.400" fontSize="xl">
               ${product.price}
             </Text>
+            <Link to={`/products/${product._id}`}>
             <Button
               colorScheme="yellow"
               size="sm"
               bg="yellow.400"
               color="black"
               _hover={{ bg: "yellow.300" }}
-              onClick={async ()=>{
-                console.log("🟢 adding to cart:", product);
-                await addToCart(product)
-                await fetchCart()       }
+              onClick={async ()=>{    }
               }
             >
-              Add to Cart
+              Product Detail
             </Button>
-             <Button
+            </Link>
+            {/* Only for admin */}
+             {/* <Button 
               colorScheme="yellow"
               size="sm"
               bg="yellow.400"
@@ -55,6 +56,24 @@ const navigate = useNavigate();
               }
             >
               Edit Product
+            </Button> */}
+             <Button
+              colorScheme="yellow"
+              size="sm"
+              bg="yellow.400"
+              color="black"
+              _hover={{ bg: "yellow.300" }}
+              onClick={async ()=>{
+                console.log("🟢 adding to cart:", product);
+                 if(!user){
+              navigate("/login");
+              return
+                          }
+             await addToCart(product)
+                await fetchCart()       }
+              }
+            >
+              Add to Cart
             </Button>
           </HStack>
         </VStack>

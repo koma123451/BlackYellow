@@ -49,6 +49,7 @@ export  const useProductStore = create((set)=>({
 
   fetchProduct: async()=>{
     const {data} = await apiRequest('/products');
+    console.log("productdetaildata",data.data)
     set({products:data.data})
   },
 
