@@ -2,9 +2,11 @@ import { Box, HStack, VStack ,Image,Text,Button,SimpleGrid} from "@chakra-ui/rea
 import CartCard from '../components/cart/CartCard.jsx'
 import {useCart} from '../store/cart.js'
 import {useEffect} from 'react'
+import { useNavigate } from "react-router-dom";
 
 
 const Cart = ()=>{
+  const navigate = useNavigate()
   const {cart,fetchCart,removeFromCart,updateQuantity}=useCart();
   const subtotal=cart.reduce((sum,item)=>{
     return sum+item.productId.price*item.quantity
@@ -92,7 +94,7 @@ minH="100vh"
     size="lg"
     mt={4}
     w="100%"
-    onClick={() => console.log("checkout")}
+    onClick={() => navigate("/CheckoutPage")}
   >
     Checkout
   </Button>
