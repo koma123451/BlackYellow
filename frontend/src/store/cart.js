@@ -98,6 +98,7 @@ updateQuantity:async(itemId,action)=>{
 
 
 },
+clearCart:()=>set({cart:[]})
 
 
 

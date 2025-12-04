@@ -1,10 +1,18 @@
 import { Box, VStack, HStack, Input, Text, Button } from "@chakra-ui/react";
 import { useCart } from "../store/cart.js";
 import { useNavigate } from "react-router-dom";
-
+import { useToast } from "@chakra-ui/react";
+import {useOrderStore} from '../store/order.js'
+import {useEffect} from 'react'
 export default function Checkout() {
-  const { cart } = useCart();
+  const { cart,clearCart,fetchCart } = useCart();
   const navigate = useNavigate();
+  const toast = useToast()
+  const{createOrder} = useOrderStore();
+ useEffect(() => {
+  fetchCart();
+}, []);
+
 
   // 计算小计
   const subtotal = cart.reduce(
@@ -13,7 +21,32 @@ export default function Checkout() {
   );
   const tax = subtotal * 0.13;
   const total = subtotal + tax;
+  async function placeOrder(){
+    if(!cart.length){
+      toast({title:"Cart is empyt",status:"warning"});
+      return
+    }
+    const orderData = {
+      items:cart.map(i=>({
+        productId:i.productId._id,
+        quantity:i.quantity,
+        price:i.productId.price
+      })),
+      subtotal,
+      tax,
+      total
+    }
+    console.log("📤 sending order:", orderData);
 
+    const order = await createOrder(orderData);
+    console.log(order)
+    if(order){
+      clearCart();
+      navigate(`/orders/${order.data._id}`)
+    }else{
+      toast({title:"Order failed",status:"error"})
+    }
+  }
   return (
     <Box bg="gray.900" color="white" w="100vw" minH="100vh" py={20}>
       <Text textAlign="center" fontSize="4xl" color="yellow.400">Checkout</Text>
@@ -52,7 +85,7 @@ export default function Checkout() {
             <Text fontSize="lg" fontWeight="bold" color="yellow.300">${total.toFixed(2)}</Text>
           </HStack>
 
-          <Button colorScheme="yellow" w="100%" mt={3}>
+          <Button colorScheme="yellow" w="100%" mt={3} onClick={placeOrder}>
             Place Order
           </Button>
 

@@ -45,7 +45,7 @@
 // }
 
 import { apiRequest } from "./api.js";
-
+////user auth
 // Register
 export const registerUser = async ({ username, email, password }) => {
   const { ok, data } = await apiRequest("/auth/register", {
@@ -79,3 +79,4 @@ export const logout = async () => {
   
   return ok;
 };
+
