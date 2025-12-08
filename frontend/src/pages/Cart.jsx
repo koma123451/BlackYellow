@@ -14,8 +14,9 @@ const Cart = ()=>{
 console.log("cart:",cart); // 可能是 object 或 null，而不是 array
 console.log(typeof cart)
   useEffect(()=>{
-  fetchCart()
+  fetchCart().then(()=>console.log("📦 Cart after fetch:",cart))
   },[])
+  console.log("cart::",cart)
   return(
     <Box
   bg="gray.900"

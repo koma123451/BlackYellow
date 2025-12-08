@@ -2,9 +2,11 @@ import {useState} from "react"
 import{Box,useToast} from "@chakra-ui/react"
 import {useProductStore} from '../store/product.js'
 import ProductForm from '../components/product/ProductForm.jsx'
+import {useUserStore} from '../store/user.js'
 const CreatePage = ()=>{
  
   const addProduct = useProductStore((s)=>s.addProduct)
+  const user = useUserStore(s => s.user);
   const [product,setProduct]= useState({
     name:"",
     brand:"",
@@ -20,6 +22,15 @@ const handleChange=(e)=>{
 }
 const handleSubmit = async (e)=>{
   e.preventDefault();
+  if (user?.role !== "admin") {
+      toast({
+        title: "Admin access only",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
   if(!product.name||!product.type||!product.brand||!product.price){
     toast({
       title:"Missing fields",

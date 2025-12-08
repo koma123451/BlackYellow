@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const {user,logout}= useUserStore();
-  console.log(user)
+  console.log("user",user)
   console.log("🔥 CURRENT API URL:", import.meta.env.VITE_API_URL);
 
 const navigate = useNavigate();
@@ -22,7 +22,12 @@ const navigate = useNavigate();
         {/* 按钮组 */}
         <HStack spacing={4}>
           <Button variant="solid" as={Link} to="/">Home</Button>
+          {user?.role==="admin" &&
+          <>
           <Button variant="solid" as={Link} to="/CreatePage" >Create</Button>
+
+          </>
+          }
           {/* display Register and login if not logged in */}
             {!user && (
     <>

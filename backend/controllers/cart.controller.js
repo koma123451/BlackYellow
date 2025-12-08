@@ -4,7 +4,7 @@ import {Cart} from '../models/cart.model.js'
 
 export const getCart = async(req,res)=>{
   try{
-    const {userId} = req.params;
+    const userId = req.userId;
     const cart = await Cart.findOne({userId}).populate("products.productId")
     res.json({success:true,data:cart?.products||{products:[]}})
 
@@ -17,8 +17,11 @@ export const getCart = async(req,res)=>{
 export const addToCart = async(req,res)=>{
   try{
     console.log("🟡 Incoming cart data:", req.body);
-    const {userId,productId}= req.body;
+    const userId = req.userId;
+    console.log("user Id add to cart",userId)
+    const {productId}= req.body;
     let cart = await Cart.findOne({userId})
+    console.log("cart:",cart)
 
     if(!cart){
       cart=new Cart({userId,products:[{productId,quantity:1}]})
@@ -34,7 +37,7 @@ export const addToCart = async(req,res)=>{
     }
 
     await cart.save();
-    res.status(201).json({success:true,data:cart});
+    res.status(201).json({success:true,data:cart.products});
 
   }catch(error){
     console.log(error.message)
@@ -45,7 +48,8 @@ export const addToCart = async(req,res)=>{
 
 export const removeFromCart = async (req, res) => {
   try {
-    const { userId, itemId } = req.params;
+    const {itemId} = req.params;
+    const userId = req.userId;
     console.log("params:", req.params);
 
     const cart = await Cart.findOne({ userId }).populate("products.productId");
@@ -79,8 +83,8 @@ export const removeFromCart = async (req, res) => {
 
 export const updateQuantity = async(req,res)=>{
   console.log("PUT Route Hit:", req.params);
-  const {userId,itemId} =req.params;
-  
+  const {itemId} =req.params;
+  const userId = req.userId;
   const{action} = req.body;
   const cart = await Cart.findOne({userId}).populate("products.productId");
   if(!cart){ 

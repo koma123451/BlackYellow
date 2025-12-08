@@ -11,8 +11,8 @@ const cookieOptions = {
 };
 
 
-const generateToken=(id)=>{
-  return jwt.sign({id},process.env.JWT_SECRET,{expiresIn:"30d"});
+const generateToken=(user)=>{
+  return jwt.sign({id:user._id,role:user.role},process.env.JWT_SECRET,{expiresIn:"30d"});
 }
 export const getUser = async(req,res)=>{
  try{
@@ -23,7 +23,8 @@ export const getUser = async(req,res)=>{
   res.json({
     id:user._id,
     username:user.username,
-    email:user.email
+    email:user.email,
+    role:user.role
   })
 
  }catch(error){
@@ -42,11 +43,12 @@ export const registerUser = async(req,res)=>{
   if(exists) return res.status(400).json({message:"Email already exists"})
   const user = await User.create({username,email,password});
   console.log("newUser",user)
-  res.cookie("token",generateToken(user._id),cookieOptions)
+  res.cookie("token",generateToken(user),cookieOptions)
   res.json({
     id:user._id,
     username:user.username,
-    email:user.email
+    email:user.email,
+    role:user.role
   })
 }
 export const loginUser = async(req,res)=>{
@@ -57,11 +59,12 @@ export const loginUser = async(req,res)=>{
   if(!user||!(await user.matchPassword(password))){
     return res.status(401).json({message:"Invalid email or password"})
   }
-  res.cookie("token",generateToken(user._id),cookieOptions)
+  res.cookie("token",generateToken(user),cookieOptions)
   res.json({
     id:user._id,
     username:user.username,
-    email:user.email
+    email:user.email,
+    role:user.role
   })
 }
 
