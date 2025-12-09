@@ -27,7 +27,7 @@ export const updateProduct = async(req,res)=>{
       {new:true} //return updated version
     )
     if(!products){
-      return res.status(404),json({success:true,message:"Product not found"})
+      return res.status(404).json({success:true,message:"Product not found"})
     }
     res.status(200).json({success:true,data:products})
 
@@ -35,7 +35,16 @@ export const updateProduct = async(req,res)=>{
 console.log(error)
     res.status(500).json({ success: false, message: "Server error" })
   }
+}
+export const getProductById = async(req,res)=>{
 
+  try{
+    const {id}= req.params;
+    const product = await Product.findById(id);
+    res.status(200).json({success:true,data:product})
 
-
+    
+  }catch(error){
+    res.status(404).json({success:true,message:"Product not found"})
+  }
 }

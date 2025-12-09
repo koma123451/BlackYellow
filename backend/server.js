@@ -7,6 +7,7 @@ import { connectDB } from './config/db.js';
 import productRoutes from './routes/product.routes.js';
 import cartRoutes from './routes/cart.routes.js';
 import authRoutes from './routes/auth.routes.js';
+import userRoutes from './routes/user.routes.js'
 
 dotenv.config();
 const app = express();
@@ -46,6 +47,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes)
 app.use('/api/auth', authRoutes);
 app.use('/api/orders',orderRoutes)
+app.use('/api/users',userRoutes)
 // ====================================================
 
 

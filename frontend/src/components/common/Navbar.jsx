@@ -24,8 +24,7 @@ const navigate = useNavigate();
           <Button variant="solid" as={Link} to="/">Home</Button>
           {user?.role==="admin" &&
           <>
-          <Button variant="solid" as={Link} to="/CreatePage" >Create</Button>
-
+          <Button variant="solid" as={Link} to="/admin" >Admin</Button>
           </>
           }
           {/* display Register and login if not logged in */}

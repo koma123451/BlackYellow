@@ -15,7 +15,11 @@ import ProtectedRoute from './components/ProtectedRoute.jsx'
 import CheckoutPage from './pages/CheckoutPage.jsx'
 import OrderDetail from './pages/OrderDetail.jsx'
 import {useUserStore} from './store/user.js'
+import AdminDashboard from './pages/AdminDashboard.jsx'
 import {useEffect} from 'react'
+import AdminProducts from './pages/AdminProducts.jsx'
+import AdminUsers from './pages/AdminUsers.jsx'
+
 
 
 function App() {
@@ -41,6 +45,9 @@ if(loading) return <p>Loading</p>
   <Route path="/EditPage/:id" element={<EditPage/>}></Route>
   <Route path="/Login" element={<Login/>}></Route>
   <Route path="/Register" element={<Rigister/>}></Route>
+  <Route path="/admin" element={<AdminDashboard />} />
+  <Route path="/adminProducts" element={<AdminProducts />} />
+  <Route path="/adminUsers" element={<AdminUsers />} />
 </Routes>
 <Footer></Footer>
 </>

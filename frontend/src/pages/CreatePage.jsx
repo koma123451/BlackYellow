@@ -3,9 +3,11 @@ import{Box,useToast} from "@chakra-ui/react"
 import {useProductStore} from '../store/product.js'
 import ProductForm from '../components/product/ProductForm.jsx'
 import {useUserStore} from '../store/user.js'
+import { useNavigate } from "react-router-dom";
 const CreatePage = ()=>{
  
   const addProduct = useProductStore((s)=>s.addProduct)
+  const navigate = useNavigate();
   const user = useUserStore(s => s.user);
   const [product,setProduct]= useState({
     name:"",
@@ -51,6 +53,7 @@ const handleSubmit = async (e)=>{
     isClosable:true,
   });
    setProduct({name:"",brand:"",price:"",image:"",type:""})
+   navigate("/AdminProducts")
   }else{
     toast({
       title:"Server error",
