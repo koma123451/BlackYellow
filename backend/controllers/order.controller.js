@@ -1,6 +1,55 @@
 // controllers/order.controller.js
 import { Order } from "../models/order.model.js";
 
+
+
+
+
+
+// GET /api/orders?status=shipped
+export const getAllOrders = async (req, res) => {
+  try {
+    const { status } = req.query;
+    const filter = {};
+    if (status && status !== "all") {
+      filter.status = status;
+    }
+
+    const orders = await Order.find(filter)
+      .populate("userId", "email username")
+      .populate("items.productId", "name price")
+      .sort({ createdAt: -1 });
+
+    res.json({ success: true, data: orders });
+  } catch (error) {
+    console.log("GetAllOrders error:", error.message);
+    res.status(500).json({ success: false, message: "Failed to fetch orders" });
+  }
+};
+
+// PATCH /api/orders/:id/status
+export const updateOrderStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body; // pending | paid | shipped | delivered | cancelled
+
+    const order = await Order.findById(id);
+    if (!order) {
+      return res.status(404).json({ success: false, message: "Order not found" });
+    }
+
+    order.status = status;
+    await order.save();
+
+    res.json({ success: true, data: order });
+  } catch (error) {
+    console.log("UpdateOrderStatus error:", error.message);
+    res.status(500).json({ success: false, message: "Failed to update order status" });
+  }
+};
+
+
+
 export const createOrder = async (req, res) => {
   try {
     const { items, subtotal, tax, total } = req.body;

@@ -19,7 +19,7 @@ import AdminDashboard from './pages/AdminDashboard.jsx'
 import {useEffect} from 'react'
 import AdminProducts from './pages/AdminProducts.jsx'
 import AdminUsers from './pages/AdminUsers.jsx'
-
+import AdminOrders from './pages/AdminOrders.jsx'
 
 
 function App() {
@@ -48,6 +48,7 @@ if(loading) return <p>Loading</p>
   <Route path="/admin" element={<AdminDashboard />} />
   <Route path="/adminProducts" element={<AdminProducts />} />
   <Route path="/adminUsers" element={<AdminUsers />} />
+  <Route path="/adminOrders" element={<AdminOrders />} />
 </Routes>
 <Footer></Footer>
 </>
