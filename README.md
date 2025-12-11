@@ -1,102 +1,185 @@
-🛍️ BlackYellow — Full-Stack E-Commerce App
-A modern full-stack e-commerce application built with React, Node.js, MongoDB, and JWT authentication.
-Users can register, log in, browse products, add items to cart, and manage their shopping session securely.
+🛍️ BlackYellow — Full-Stack E-Commerce Application
 
-🔗 Live Demo: (部署后填)
-📦 Backend Repo: (可选)
-🎨 Frontend Repo: (可选，或者写 Monorepo)
-🚀 Features
-Functions status
-User Registration & Login ✅
-JWT Auth with HttpOnly Cookies ✅
-Protected Routes ✅
-CRUD Product Management ✅
-Shopping Cart with Persistent State ✅
-Logout & Session Handling ✅
-Responsive UI (Chakra UI) ✅
+A production-ready full-stack e-commerce web application built with React, Zustand, Node.js, Express, MongoDB, and JWT authentication using HttpOnly cookies.
+
+Users can browse keyboards, filter by brand, search products, manage their cart, and maintain a persistent authenticated session.
 
 ---
+
+🚀 Live Demo
+
+https://black-yellow-eta.vercel.app/
+
+(Frontend deployed on Vercel, Backend on Railway)
+
+---
+
+✨ Features Overview
+👤 Authentication
+
+-User registration & login
+
+-JWT authentication stored in HttpOnly cookies
+
+-Automatic session restoration
+
+-Protected routes (frontend + backend)
+
+-Logout with secure cookie clearing
+
+---
+
+🛒 Shopping Cart
+
+-Add / remove items
+
+-Auto-increase quantity for repeated items
+
+-Cart stored per user in MongoDB
+
+-Automatically loads after login
+
+-Zustand ensures real-time UI updates
+
+---
+
+🛍️ Product Browsing
+
+-Brand filtering
+
+-Keyword search
+
+-Price sorting
+
+-Pagination
+
+-Responsive UI with Chakra UI
+
+-ProductCard component for modular rendering
+
+---
+
+🛠️ Admin Dashboard (Role-Based Access)
+
+The application includes a full role-based Admin Dashboard accessible only to authenticated users with role: "admin".
+
+Admin Capabilities
+
+\*Products
+
+-Create products
+
+-Edit product info
+
+-Delete products
+
+-View inventory list
+
+\*Orders
+
+-View all customer orders
+
+-Inspect items, totals, and timestamps
+
+-Update order status
+
+\*Users
+
+-View all registered users
+
+-Inspect user roles
+
+-Promote / demote roles
+
+-Remove accounts
+
+\*Access Control
+
+-JWT verification middleware
+
+-Role-based authorization
+
+-Frontend route guards
 
 🧠 Tech Stack
 Frontend
 
 React + Vite
 
-Zustand (Global State)
+Zustand (global state management)
 
 React Router
 
 Chakra UI
 
+Custom fetch wrapper (api.js) with credentials support
+
 Backend
 
-Node.js / Express
+Node.js + Express
 
 MongoDB + Mongoose
 
-JWT Authentication (HttpOnly Cookies)
+JWT + HttpOnly cookies
 
-## REST API Architecture
+Role-based middleware
 
-🔐 Authentication Flow
-flowchart TD
-A[User submits login form] --> B[Backend validates credentials]
-B --> C[Create JWT]
-C --> D[Send HttpOnly Cookie]
-D --> E[Frontend stores user in global state]
-E --> F[Protected pages unlocked]
+RESTful API architecture
 
----
+## 📸 Screenshots
 
-📄 API Endpoints
-Method Endpoint Description Auth Required
-POST /api/auth/register Create new account ❌
-POST /api/auth/login Login + return token cookie ❌
-POST /api/auth/logout Clear session cookie ✔
-GET /api/auth Get current user from token ✔
-GET /api/products Fetch all products ❌
-POST /api/products Create product ✔ (admin optional)
-GET /api/cart Get user's cart ✔
-POST /api/cart/:id Add item ✔
-DELETE /api/cart/:id Remove item ✔
+### 🏠 Home Page
+
+![Home Page](screenshots/homePage.png)
 
 ---
 
-🛠️ Installation & Setup
-1️⃣ Clone repo
-git clone https://github.com/<your-name>/blackyellow.git
-cd blackyellow
-2️⃣ Install dependencies
-npm install
-3️⃣ Create .env
-MONGO_URI=your_connection_string
-JWT_SECRET=your_random_secret_key
-NODE_ENV=development
-4️⃣ Run backend
-cd backend
-npm run dev
-5️⃣ Run frontend
-cd frontend
-npm run dev
+### 🔐 Authentication
+
+#### Login Page
+
+![Login](screenshots/Login.png)
+
+#### Register Page
+
+![Register](screenshots/Register.png)
+
+#### Login as Admin
+
+![Login as Admin](screenshots/LoginAsAdmin.png)
 
 ---
 
-📸 Screenshots
+### 🛍️ Product Browsing
+
+#### Cart Page
+
+![Cart Page](screenshots/CartPage.png)
+
+#### Checkout Page
+
+![Checkout Page](screenshots/CheckOutPage.png)
+
+#### Place Order
+
+![Place Order](screenshots/PlaceOrder.png)
 
 ---
 
-🧩 Future Improvements
+## 🛠️ Admin Dashboard
 
-Admin dashboard
+### Dashboard Overview
 
-Product search + filters
+![Admin Dashboard](screenshots/AdminDashBoard.png)
 
-Stripe payments
+### Manage Products
 
-## Favorites / Wishlist
+![Admin Products](screenshots/AdminDashBoard_Product.png)
 
-👤 Author
+### View Orders
 
-Bowen Dai
-📍 Toronto, Canada
-💼 Seeking Junior Full-Stack / Frontend roles
+![Admin Orders](screenshots/AdminDashBoard_Orders.png)
+
+### Manage Users
+
+![Admin Users](screenshots/AdminDashBoard_Users.png)
